@@ -22,38 +22,46 @@ const HomeView = () => {
 
   return (
     <ScrollView>
-    <View>
-      <AvatarInfos id={1 } name={name} level={level} isMale={isMale}  src={require('../../assets/images/image1.jpg')}  />
-      <AvatarInfos id={2 } name={'Atlas 01'} level={10} isMale={false} src={require('../../assets/images/image2.jpg')} />
-      <AvatarInfos id={3 } name={'Jimmy'}    level={70} isMale={true} src={require('../../assets/images/image3.jpg')} />
-    </View>
+      <View>
+        <AvatarInfos
+          name={name}
+          level={level}
+          isMale={isMale}
+          src={require('../../assets/images/image1.jpg')}
+        />
+        <AvatarInfos
+          name={'Atlas 01'}
+          level={10}
+          isMale={false}
+          src={require('../../assets/images/image2.jpg')}
+        />
+        <AvatarInfos
+          name={'Jimmy'}
+          level={70}
+          isMale={true}
+          src={require('../../assets/images/image3.jpg')}
+        />
+      </View>
     </ScrollView>
   );
 };
 // infos
-// utilisation des props en react native
+// utilisation des en react native
 type AvatarInfosType = {
-    name: string;
-    level:number;
-    isMale:boolean; 
-    src:any; 
-}
-const AvatarInfos = (props: any) => {
+  name: string;
+  level: number;
+  isMale: boolean;
+  src: any;
+};
+const AvatarInfos = ({name, level, isMale, src}: AvatarInfosType) => {
   return (
     <View>
       <Text style={styles.TextCenter}>This is an Avatar </Text>
       <Text>
-        His name is {props.name}, his level is {props.level}
+        His name is {name}, his level is {level}
       </Text>
-      {props.isMale ? (
-        <Text>This is a male </Text>
-      ) : (
-        <Text>This is a female</Text>
-      )}
-      <Image
-        source={props.src} 
-        style={styles.imageAvatar}
-      />
+      {isMale ? <Text>This is a male </Text> : <Text>This is a female</Text>}
+      <Image source={src} style={styles.imageAvatar} />
     </View>
   );
 };
@@ -62,8 +70,6 @@ const styles = StyleSheet.create({
   TextCenter: {
     textAlign: 'center',
     paddingBottom: 15,
-    backgroundColor: 'blue',
-    color: 'white',
     justifyContent: 'center',
     padding: 15,
   },
