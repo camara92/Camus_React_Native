@@ -1,16 +1,24 @@
 
 
 import {StyleSheet, View, Text, Image, ScrollView, FlatList, Button, DrawerLayoutAndroidComponent, TouchableOpacity} from 'react-native';
-import { ListAvatar } from '../../data/AvatarsLists';
+import { ListAvatarORiginal } from '../../data/AvatarsLists';
 import { Avatar } from '../../models/Avatars';
 import React, { useState } from 'react';
 
 const HomeView = () => {
   // state en react native :
   const [counterAvatar, setCounterAvatar]= useState(0);
+  const [ListAvatar, setListAvatar]= useState(ListAvatarORiginal);
+  // nom de l'avatar 
   const getNameAvatar =(nameAvatar:string) =>{
     console.log("My name is ", nameAvatar); 
     console.log("The next avatar name ", ListAvatar[counterAvatar + 1].name); 
+  }
+  // augmenter le niveau de l'avater : 
+  const modifyLevelAvatar =() =>{
+    let newArr= [...ListAvatar];
+    ListAvatar[counterAvatar].level = ListAvatar[counterAvatar].level +5;
+    setListAvatar(newArr); 
   }
 
   const onNext = ()=>{
@@ -48,7 +56,8 @@ const HomeView = () => {
           level={ListAvatar[counterAvatar].level}
           isMale={ListAvatar[counterAvatar].isMale}
           src={ListAvatar[counterAvatar].src} 
-          onClickAvatar = {getNameAvatar}
+          // onClickAvatar = {getNameAvatar}
+          onClickAvatar = {modifyLevelAvatar}
           />
       
       </View>
@@ -66,7 +75,8 @@ const AvatarInfos = ({name, level, isMale, src, onClickAvatar}: Avatar) => {
       </Text>
       {isMale ? <Text>This is a male </Text> : <Text>This is a female</Text>}
       <TouchableOpacity
-        onPress={()=>onClickAvatar(name)}
+        // onPress={()=>onClickAvatar(name)}
+       onPress={()=>onClickAvatar()}
       >
       <Image source={src} style={styles.imageAvatar} />
       </TouchableOpacity>
