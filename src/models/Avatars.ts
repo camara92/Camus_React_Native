@@ -5,4 +5,5 @@ export type Avatar = {
   level: number;
   isMale: boolean;
   src: any;
+  onClickAvatar:any
 };
