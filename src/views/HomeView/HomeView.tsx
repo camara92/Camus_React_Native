@@ -1,59 +1,37 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable quotes */
-/* eslint-disable prettier/prettier */
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
 
-import {StyleSheet, View, Text, Image, ScrollView} from 'react-native';
+
+import {StyleSheet, View, Text, Image, ScrollView, FlatList} from 'react-native';
+import { ListAvatar } from '../../data/AvatarsLists';
+import { Avatar } from '../../models/Avatars';
 
 const HomeView = () => {
   const name = 'Atlas Avatar';
   const level: number = 15;
   const isMale: boolean = true;
+  console.log('Name is : ', name);
 
   return (
-    <ScrollView>
+  
       <View>
-        <AvatarInfos
-          name={name}
-          level={level}
-          isMale={isMale}
-          src={require('../../assets/images/image1.jpg')}
-        />
-        <AvatarInfos
-          name={'Atlas 01'}
-          level={10}
-          isMale={false}
-          src={require('../../assets/images/image2.jpg')}
-        />
-        <AvatarInfos
-          name={'Jimmy'}
-          level={70}
-          isMale={true}
-          src={require('../../assets/images/image3.jpg')}
-        />
+      <FlatList
+        data={ListAvatar}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({item})=> 
+            <AvatarInfos
+        id={item.id}
+          name={item.name}
+          level={item.level}
+          isMale={item.isMale}
+          src={item.src}/>
+        
+        }
+      />
       </View>
-    </ScrollView>
+   
   );
 };
-// infos
-// utilisation des en react native
-type AvatarInfosType = {
-  name: string;
-  level: number;
-  isMale: boolean;
-  src: any;
-};
-const AvatarInfos = ({name, level, isMale, src}: AvatarInfosType) => {
+
+const AvatarInfos = ({name, level, isMale, src}: Avatar) => {
   return (
     <View>
       <Text style={styles.TextCenter}>This is an Avatar </Text>
@@ -68,7 +46,7 @@ const AvatarInfos = ({name, level, isMale, src}: AvatarInfosType) => {
 const styles = StyleSheet.create({
   Container: {},
   TextCenter: {
-    textAlign: 'center',
+    // textAlign: 'center',
     paddingBottom: 15,
     justifyContent: 'center',
     padding: 15,
